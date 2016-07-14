@@ -87,7 +87,7 @@ public class PlayerMovement {
                 }
                 break;
         }
-
+        //This is a test
         collisionCheck();
 
         //Log position

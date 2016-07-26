@@ -1,4 +1,5 @@
 package com.mygdx.game;
+//test
 /**
  * Created by Steven Hancock on 3/3/2016.
  * This class defines the attributes for an enemy and holds the chase, patrol and search functions for each enemy.

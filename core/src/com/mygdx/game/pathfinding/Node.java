@@ -2,7 +2,7 @@ package com.mygdx.game.pathfinding;
 
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.ai.pfa;
+import com.badlogic.gdx.ai.pfa.Indexed.IndexedNode;
 
 /**
  * Created by Steven Hancock on 6/16/2016.

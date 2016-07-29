@@ -1,5 +1,11 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
+import com.mygdx.game.pathfinding.GraphPathImp;
+import com.mygdx.game.pathfinding.HeuristicImp;
+import com.mygdx.game.pathfinding.Node;
+
 /**
  * Created by Steven Hancock on 3/3/2016.
  */
@@ -10,6 +16,9 @@ public class Enemy extends DynamicGameObject {
     public static final float enemyWidth = 1;
     public static final float enemyHeight = 0.6f;
     public static final float enemyVelocity = 2f;
+
+    private IndexedAStarPathFinder<Node> pathFinder;
+    private GraphPathImp resultPath = new GraphPathImp();
 
     float stateTime = 0;
 
@@ -65,6 +74,28 @@ public class Enemy extends DynamicGameObject {
     public void search(float deltaTime)
     {
         //Implement this when it becomes neccessary
+
+
+        pathFinder = new IndexedAStarPathFinder<Node>(Map.graph, false);
+
+        int startX = (int) position.x;
+        int startY = (int) position.y;
+
+        int endX = (int) GameScreen.player.playerPosition.x;
+        int endY = (int) GameScreen.player.playerPosition.y;
+
+        Gdx.app.log("start", "X" + startX + " Y" + startY);
+        Gdx.app.log("end", "X" + endX + " Y" + endY);
+
+        Node startNode = Map.graph.getNodeByXY(startX, startY);
+        Node endNode = Map.graph.getNodeByXY(endX, endY);
+
+        Gdx.app.log("start", " " + startNode);
+        Gdx.app.log("end", " " + endNode);
+
+        pathFinder.searchNodePath(startNode, endNode, new HeuristicImp(), resultPath);
+        Gdx.app.log("Path", " " + resultPath.getCount());
+
     }
 
 }

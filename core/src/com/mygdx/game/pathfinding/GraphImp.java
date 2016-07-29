@@ -9,35 +9,54 @@ import com.mygdx.game.Map;
 /**
  * Created by Steven Hancock on 6/16/2016.
  */
-public abstract class GraphImp implements IndexedGraph<Node> {
+public class GraphImp implements IndexedGraph<Node> {
+    //Create array of nodes
     private Array<Node> nodes = new Array<Node>();
+
+    private int capacity, NodeCount;
+
 
     public GraphImp() {
         super();
     }
     public GraphImp(int capacity) {
-        super(capacity);
+        this.capacity = capacity;
     }
 
     public GraphImp(Array<Node> nodes) {
-        super(nodes);
         this.nodes = nodes;
     }
 
-    @Override
     public Array<Connection<Node>> getConnection(Node fromNode) {
-        return super.getConnections(fromNode);
+        return getConnections(fromNode);
     }
 
+    @Override
+    public int getIndex(Node node) {
+        //This should return the unique node index
+        return 0;
+    }
 
     @Override
     public int getNodeCount() {
-        return super.getNodeCount();
+        //Node count is not being updated
+        return NodeCount;
     }
 
+
+    //Return a node from graph based on position
     public Node getNodeByXY(int x, int y) {
-        int nodx = x / 50;
-        int nodY = y / 50;
+
+        //Take pixel position and convert it to tile position
+        int modX = x / Map.tilePixelWidth;
+        int modY = y / Map.tilePixelHeight;
+
+        //Return the node at that position
+        return nodes.get(Map.width * modY + modX);
     }
 
+    @Override
+    public Array<Connection<Node>> getConnections(Node fromNode) {
+        return null;
+    }
 }

@@ -18,8 +18,11 @@ public class GraphGenerator {
 
     public static GraphImp generateGraph(TiledMap map)
     {
+        //Create an array of all the nodes
         Array<Node> nodes = new Array<Node>();
+        //Get the collision layer of the tiled map
         TiledMapTileLayer tiles = (TiledMapTileLayer)map.getLayers().get(0);
+        //Set up the map height and map pixel width
         int mapHeight = Map.height;
         int mapWidth = Map.mapPixelWidth;
 
@@ -30,19 +33,22 @@ public class GraphGenerator {
                 //create a node for each tile for when we create connections
                 Node node = new Node();
                 node.type = Node.Type.REGULAR;
-                node.add(node);
+                nodes.add(node);
             }
         }
 
+        //Loop through width and height of the tiles again (make this more efficient?)
         for (int y = 0; y < mapHeight; y++) {
             for (int x = 0; x < mapWidth; x++) {
+                //Get the nodes of each tile, the current node and the nodes to the left, right, up and down of that node
                 TiledMapTileLayer.Cell target = tiles.getCell(x, y);
                 TiledMapTileLayer.Cell up = tiles.getCell(x, y + 1);
                 TiledMapTileLayer.Cell left = tiles.getCell(x - 1, y);
                 TiledMapTileLayer.Cell right = tiles.getCell(x + 1, y);
                 TiledMapTileLayer.Cell down = tiles.getCell(x, y - 1);
 
-                Node targetNode = nodes.get(mapWidth + y + x);
+                //Check if the tile target is null
+                Node targetNode = nodes.get(mapWidth * y + x);
                 if (target == null) {
                     if (y != 0 && down == null) {
                         Node downNode = nodes.get(mapWidth * (y - 1) + x);

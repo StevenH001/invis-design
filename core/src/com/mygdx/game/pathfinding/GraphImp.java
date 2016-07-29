@@ -2,7 +2,6 @@ package com.mygdx.game.pathfinding;
 
 
 import com.badlogic.gdx.ai.pfa.Connection;
-import com.badlogic.gdx.ai.pfa.Graph;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedGraph;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Map;
@@ -11,9 +10,8 @@ import com.mygdx.game.Map;
  */
 public class GraphImp implements IndexedGraph<Node> {
     //Create array of nodes
-    private Array<Node> nodes = new Array<Node>();
-
-    private int capacity, NodeCount;
+    protected Array<Node> nodes = new Array<Node>();
+    protected int capacity;
 
 
     public GraphImp() {
@@ -25,24 +23,12 @@ public class GraphImp implements IndexedGraph<Node> {
 
     public GraphImp(Array<Node> nodes) {
         this.nodes = nodes;
-    }
 
-    public Array<Connection<Node>> getConnection(Node fromNode) {
-        return getConnections(fromNode);
+        for (int x = 0; x <nodes.size; x++)
+        {
+            nodes.get(x).index = x;
+        }
     }
-
-    @Override
-    public int getIndex(Node node) {
-        //This should return the unique node index
-        return 0;
-    }
-
-    @Override
-    public int getNodeCount() {
-        //Node count is not being updated
-        return NodeCount;
-    }
-
 
     //Return a node from graph based on position
     public Node getNodeByXY(int x, int y) {
@@ -56,7 +42,17 @@ public class GraphImp implements IndexedGraph<Node> {
     }
 
     @Override
+    public int getIndex(Node node) {
+        return nodes.indexOf(node, true);
+    }
+
+    @Override
+    public int getNodeCount() {
+        return nodes.size;
+    }
+
+    @Override
     public Array<Connection<Node>> getConnections(Node fromNode) {
-        return null;
+        return fromNode.getConnections();
     }
 }

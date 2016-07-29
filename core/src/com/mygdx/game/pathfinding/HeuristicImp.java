@@ -15,10 +15,10 @@ public class HeuristicImp implements Heuristic<Node> {
         int endIndex = endNode.getIndex();
 
         int startY = startIndex / Map.width;
-        int startX = startIndex & Map.width;
+        int startX = startIndex % Map.width;
 
         int endY = endIndex / Map.width;
-        int endX = endIndex & Map.width;
+        int endX = endIndex % Map.width;
 
         //Calculate distance based on Pythagorean theorem
         float distance = (Math.abs(startX - endX) * Math.abs(startX - endX)) + (Math.abs(startY - endY) * Math.abs(startY - endY));

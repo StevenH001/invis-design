@@ -12,8 +12,8 @@ import com.badlogic.gdx.math.Vector2;
 public class PlayerMovement {
     public direction moveDirection = null;
 
-    public static enum direction {
-        LEFT, DOWN, UP, RIGHT;
+    public enum direction {
+        LEFT, DOWN, UP, RIGHT
     }
 
     public void update() {
@@ -22,8 +22,8 @@ public class PlayerMovement {
             //Call the move direction function
             moveInDirection(moveDirection);
 
-
-            moveDirection = null;
+            //not sure why this is here -MZ
+            //moveDirection = null;
         }
     }
 

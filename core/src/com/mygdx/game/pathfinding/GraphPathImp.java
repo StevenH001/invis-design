@@ -33,6 +33,10 @@ public class GraphPathImp implements GraphPath<Node> {
     public Node get(int i) {
         return nodes.get(i);
     }
+
+    public Node removeIndex(int index) {
+        return nodes.removeIndex(index);
+    }
     //Return a node to add
     @Override
     public void add(Node node) {
@@ -46,6 +50,6 @@ public class GraphPathImp implements GraphPath<Node> {
     //Return the reverse
     @Override
     public void reverse() {
+        nodes.reverse();
     }
-
 }

@@ -52,12 +52,12 @@ public class Player {
 
         //LOAD POSITION
         Element position = root.getChildByName("position");
-        //int defaultX = 19, defaultY = 17;
+        int defaultX = 19, defaultY = 17;
         int x = position.getIntAttribute("x");
         int y = position.getIntAttribute("y");
-        //int offsetX = x-defaultX;
-        //int offsetY = y-defaultY;
-        //GameScreen.camera.translate(offsetX*32,offsetY*32);
+        int offsetX = x-defaultX;
+        int offsetY = y-defaultY;
+        GameScreen.camera.translate(offsetX*32,offsetY*32);
         playerPosition.set(x, y);
 
     }
